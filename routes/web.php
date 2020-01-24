@@ -39,7 +39,7 @@ Route::post('newpost', function (Request $request) {
     'text' => 'required|max:255',
   ]);
   if ($validator->fails()) {
-    return redirect('/')
+    return redirect('/newpost')
     ->withInput()
     ->withErrors($validator);
   }
