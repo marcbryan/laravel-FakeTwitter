@@ -38,7 +38,7 @@
         @csrf
         <input type="text" name="text" placeholder="Texto del post">
         <input type="text" name="img" placeholder="URL de imagen">
-        <input type="submit" value="Crear post">
+        <input type="submit" class="btn btn-primary" value="Crear post">
       </form>
     </main>
   </body>

@@ -13,6 +13,7 @@
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,11 +31,11 @@ Route::get('/randompost', function () {
   return view('random_post', ['post'=>$post]);
 });
 
-Route::get('newpost', function () {
+Route::get('/newpost', function () {
   return view('new_post');
 })->middleware('auth');
 
-Route::post('newpost', function (Request $request) {
+Route::post('/newpost', function (Request $request) {
   $validator = Validator::make($request->all(), [
     'text' => 'required|max:255',
   ]);
@@ -54,6 +55,18 @@ Route::post('newpost', function (Request $request) {
   // Volver a view newpost
   return redirect('/newpost');
 });
+
+Route::get('/posts', function() {
+  $posts = App\Post::all();
+  $columns = Schema::getColumnListing('posts');
+  return view('posts_list', ['posts'=>$posts, 'columns'=>$columns]);
+})->middleware('auth');
+
+Route::get('/posts/dateDESC', function() {
+  $posts = App\Post::all()->sortByDesc('created_at');
+  $columns = Schema::getColumnListing('posts');
+  return view('posts_list', ['posts'=>$posts, 'columns'=>$columns]);
+})->middleware('auth');
 
 
 // Authentication
