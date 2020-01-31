@@ -74,3 +74,7 @@ Route::get('/posts/dateDESC', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Todas las rutas del CRUD
+Route::resource('/post', 'PostController')->middleware('auth');
